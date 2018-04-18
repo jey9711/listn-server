@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "express": "^4.15.4",
+    "prop-types": "^15.6.1",
+    "query-string": "^6.0.0",
     "querystring": "^0.2.0",
     "request": "^2.81.0"
   }

@@ -11,13 +11,13 @@ const PORT = process.env.PORT || '8888'
 const app = express()
 
 app.get('/login', function(req, res) {
-  res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: CLIENT_ID,
-      scope: 'user-read-private user-read-email user-read-playback-state',
-      redirect_uri: REDIRECT_URI,
-    }))
+  const qs = querystring.stringify({
+    response_type: 'code',
+    client_id: CLIENT_ID,
+    scope: 'user-read-private user-read-email user-read-playback-state',
+    redirect_uri: REDIRECT_URI,
+  })
+  res.redirect(`https://accounts.spotify.com/authorize?${qs}`)
 })
 
 app.get('/callback', function(req, res) {
@@ -31,14 +31,14 @@ app.get('/callback', function(req, res) {
     },
     headers: {
       'Authorization': 'Basic ' + (new Buffer(
-        CLIENT_ID + ':' + CLIENT_SECRET
+        `${CLIENT_ID}:${CLIENT_SECRET}`
       ).toString('base64'))
     },
     json: true
   }
   request.post(authOptions, function(error, response, body) {
     var access_token = body.access_token
-    res.redirect(FRONTEND_URI + '?access_token=' + access_token)
+    res.redirect(`${FRONTEND_URI}?access_token=${access_token}`)
   })
 })
 

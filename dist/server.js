@@ -23,12 +23,13 @@ var PORT = process.env.PORT || '8888';
 var app = (0, _express2.default)();
 
 app.get('/login', function (req, res) {
-  res.redirect('https://accounts.spotify.com/authorize?' + _querystring2.default.stringify({
+  var qs = _querystring2.default.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
     scope: 'user-read-private user-read-email user-read-playback-state',
     redirect_uri: REDIRECT_URI
-  }));
+  });
+  res.redirect('https://accounts.spotify.com/authorize?' + qs);
 });
 
 app.get('/callback', function (req, res) {

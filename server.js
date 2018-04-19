@@ -10,7 +10,7 @@ const PORT = process.env.PORT || '8888'
 
 const app = express()
 
-app.get('/login', function(req, res) {
+app.get('/login', (req, res) => {
   const qs = querystring.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
@@ -20,7 +20,7 @@ app.get('/login', function(req, res) {
   res.redirect(`https://accounts.spotify.com/authorize?${qs}`)
 })
 
-app.get('/callback', function(req, res) {
+app.get('/callback', (req, res) => {
   let code = req.query.code || null
   let authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -36,7 +36,7 @@ app.get('/callback', function(req, res) {
     },
     json: true
   }
-  request.post(authOptions, function(error, response, body) {
+  request.post(authOptions, (error, response, body) => {
     var access_token = body.access_token
     res.redirect(`${FRONTEND_URI}?access_token=${access_token}`)
   })

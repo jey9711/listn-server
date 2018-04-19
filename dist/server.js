@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -11,6 +15,14 @@ var _request2 = _interopRequireDefault(_request);
 var _querystring = require('querystring');
 
 var _querystring2 = _interopRequireDefault(_querystring);
+
+var _socket = require('socket.io');
+
+var _socket2 = _interopRequireDefault(_socket);
+
+var _spotifyConnectWs = require('spotify-connect-ws');
+
+var _spotifyConnectWs2 = _interopRequireDefault(_spotifyConnectWs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,4 +65,9 @@ app.get('/callback', function (req, res) {
 });
 
 console.log('Listening on port ' + PORT + '. Go /login to initiate authentication flow.');
-app.listen(PORT);
+var server = app.listen(PORT);
+var io = (0, _socket2.default)(server);
+console.log('connected with socket.io', io);
+io.of('connect').on('connection', _spotifyConnectWs2.default);
+
+exports.default = server;

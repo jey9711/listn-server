@@ -2,6 +2,9 @@ import express from 'express'
 import request from 'request'
 import querystring from 'querystring'
 
+import socketio from 'socket.io'
+import connectSocket from 'spotify-connect-ws'
+
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:8888/callback'
@@ -43,4 +46,8 @@ app.get('/callback', (req, res) => {
 })
 
 console.log(`Listening on port ${PORT}. Go /login to initiate authentication flow.`)
-app.listen(PORT)
+const server = app.listen(PORT)
+const io = socketio(server)
+io.of('connect').on('connection', connectSocket)
+
+export default server

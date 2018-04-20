@@ -38,7 +38,7 @@ app.get('/login', function (req, res) {
   var qs = _querystring2.default.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
-    scope: 'user-read-private user-read-email user-read-playback-state',
+    scope: 'user-read-private user-read-email user-read-playback-state user-modify-playback-state',
     redirect_uri: REDIRECT_URI
   });
   res.redirect('https://accounts.spotify.com/authorize?' + qs);
@@ -67,7 +67,6 @@ app.get('/callback', function (req, res) {
 console.log('Listening on port ' + PORT + '. Go /login to initiate authentication flow.');
 var server = app.listen(PORT);
 var io = (0, _socket2.default)(server);
-console.log('connected with socket.io', io);
 io.of('connect').on('connection', _spotifyConnectWs2.default);
 
 exports.default = server;

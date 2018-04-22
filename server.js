@@ -8,7 +8,7 @@ import connectSocket from 'spotify-connect-ws'
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:8888/callback'
-const FRONTEND_URI = process.env.FRONTEND_URI || 'http://localhost:3000'
+const FRONTEND_URI = process.env.FRONTEND_URI || 'http://localhost:3000/auth'
 const PORT = process.env.PORT || '8888'
 
 const app = express()

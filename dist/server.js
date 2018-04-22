@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 var CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 var REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:8888/callback';
-var FRONTEND_URI = process.env.FRONTEND_URI || 'http://localhost:3000';
+var FRONTEND_URI = process.env.FRONTEND_URI || 'http://localhost:3000/auth';
 var PORT = process.env.PORT || '8888';
 
 var app = (0, _express2.default)();
